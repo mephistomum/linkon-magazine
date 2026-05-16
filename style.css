@@ -47,8 +47,21 @@ body {
 @media only screen and (max-width: 767px) and (orientation: portrait) {
 
     body {
+        margin-top: 13.5rem;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: flex-start;
+        align-items: center;
+
+        min-height: 100vh;
+        width: 100vw;
+
         overflow-x: hidden;
         overflow-y: auto;
+
+        padding-top: 20px;
+        gap: 25px;   /* 🔥 more spacing = visual centering illusion */
     }
 
     .flipbook {
@@ -67,6 +80,25 @@ body {
         width: 100% !important;
         height: 100% !important;
     }
+
+    .headline img {
+        width: 150% !important;
+        /* max-width: 650px !important;  
+        min-width: 320px;              
+
+        height: auto !important;
+
+        display: block !important; */
+        margin-left: 300px !important;
+    }
+
+    .headline {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 }
 
 /* desktop unchanged */
