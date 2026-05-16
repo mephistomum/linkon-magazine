@@ -275,7 +275,7 @@ body {
 
 .audio-controls {
   position: fixed;
-  top: 20px;      /* changed from bottom */
+  bottom: 20px;      /* changed from bottom */
   left: 20px;
   display: flex;
   align-items: center;
