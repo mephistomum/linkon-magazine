@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" /> 
+  <link rel="stylesheet" href="bg.css" /> 
+  <link rel="icon" type="image/png" href="images/icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Long+Cang&family=Mea+Culpa&display=swap" rel="stylesheet">
+  <title>YEARBOOK 2026</title>
+
+</head>
+
+<body>
+  <!-- <audio id="bgm" src="audio/bgm.mp3" autoplay loop></audio> -->
+
+<div class="headline">
+  <img src="images/LINKON.png" alt="Yearbook Headline">
+</div>
+  <div class="flipbook">
+    <div data-names="mephistomum">
+      <img src="images/izzy.png" alt="" />
+      <!-- <small> Charmandar </small> -->
+    </div>
+    <div data-names="aurorasyl">
+      <img src="images/aurorasyl.jpg" alt="" />
+    </div>
+    <div data-names="sylnova7">
+      <img src="images/sylnova7.jpg" alt="" />
+      <!-- <small> Pikachu </small> -->
+    </div>
+    <div data-names="sylusiismine">
+      <img src="images/sylusiismine.png" alt="" />
+      <!-- <small> Mew </small> -->
+    </div>
+    <div data-names="sylusqinqin">
+      <img src="images/sylusqinqin.jpg" alt="" />
+      <!-- <small> Darkrai </small> -->
+    </div>
+        <div data-names="alyaa_ayo">
+      <img src="images/alyaa_ayo.jpg" alt="" />
+      <!-- <small> Mew </small> -->
+    </div>
+    <div class="flipbook-page poem-page"></div>
+    <div class="flipbook-page poem-page"></div>
+    <!-- <div class="hard"> -->
+  <!-- <div class="hard-content">
+    Thank You For Joining
+    <small>~ Mephistomum</small>
+  </div> -->
+<!-- </div> -->
+ </div>
+ <!-- <div class="blur-layer"></div> -->
+  <div style="text-align:center; margin:20px;">
+  <!-- <input type="text" id="searchID" placeholder="Enter Your X username">
+  <button onclick="goToUserPage()">Search</button> -->
+  <form onsubmit="goToUserPage(); return false;" style="text-align:center; margin:20px;">
+  <input type="text" id="searchID" placeholder="Enter Your X username">
+  <button type="submit">Search</button>
+</form>
+</div>
+
+    
+
+  <script src="jquery.js"></script>
+  <script src="turn.js"></script>
+<script>
+
+const flipbook = $(".flipbook");
+
+// Name → Page mapping
+let pageMap = {};
+
+$(".flipbook > div").each(function (index) {
+  const namesAttr = $(this).attr("data-names");
+
+  if (namesAttr) {
+    const namesArray = namesAttr.split(",");
+
+    namesArray.forEach(name => {
+      pageMap[name.trim().toLowerCase()] = index + 1;
+    });
+  }
+});
+
+// Initialize turn AFTER mapping
+flipbook.turn();
+
+flipbook.bind("turning", function (event, page) {
+  const totalPages = flipbook.turn("pages");
+
+  if (page === 1 || page === totalPages) {
+    flipbook.removeClass("shadow-active");
+  } else {
+    flipbook.addClass("shadow-active");
+  }
+});
+
+function goToUserPage() {
+  const inputName = document.getElementById("searchID").value.trim().toLowerCase();
+
+  if (pageMap[inputName]) {
+    flipbook.turn("page", pageMap[inputName]);
+  } else {
+    alert("Name not found!");
+  }
+}
+
+
+</script>
+ 
+  <div class="audio-controls">
+  <button id="playPauseBtn">⏸</button>
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.6">
+</div>
+<script>
+  const bgm = document.getElementById("bgm");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const volumeSlider = document.getElementById("volumeSlider");
+
+  // Default volume
+  bgm.volume = 0.6;
+
+  // Autoplay handling
+  bgm.play().catch(() => {
+    document.addEventListener("click", () => {
+      bgm.play();
+    }, { once: true });
+  });
+
+  // Play / Pause toggle
+  playPauseBtn.addEventListener("click", () => {
+    if (bgm.paused) {
+      bgm.play();
+      playPauseBtn.textContent = "⏸";
+    } else {
+      bgm.pause();
+      playPauseBtn.textContent = "▶";
+    }
+  });
+
+  // Volume control
+  volumeSlider.addEventListener("input", () => {
+    bgm.volume = volumeSlider.value;
+  });
+
+  document.getElementById("searchID").addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // prevents any default behavior
+    goToUserPage();
+  }
+});
+</script>
+
+    <canvas
+  id="sakuraCanvas"
+  style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+         pointer-events: none; z-index: -9999;"></canvas>
+
+<!-- <script src="sakura.js"></script> -->
+
+  
+</body>
+
+</html>
