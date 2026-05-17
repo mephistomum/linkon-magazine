@@ -36,12 +36,21 @@
       <img src="images/sylusiismine.png" alt="" />
       <!-- <small> Mew </small> -->
     </div>
-    <div data-names="sylusqinqin">
+    <div data-names="mephistomum">
+      <img src="images/izzysolo.png" alt="" />
+      <!-- <small> Charmandar </small> -->
+    </div>
+  
+        <div data-names="alyaa_ayo">
+      <img src="images/alyaa_ayo.jpg" alt="" />
+      <!-- <small> Mew </small> -->
+    </div>
+      <div data-names="sylusqinqin">
       <img src="images/sylusqinqin.jpg" alt="" />
       <!-- <small> Darkrai </small> -->
     </div>
-        <div data-names="alyaa_ayo">
-      <img src="images/alyaa_ayo.jpg" alt="" />
+    <div data-names="5y1u51uvsm3">
+      <img src="images/5y1u51uvsm3.jpg" alt="" />
       <!-- <small> Mew </small> -->
     </div>
     <div class="flipbook-page poem-page"></div>
@@ -67,7 +76,7 @@
 
   <script src="jquery.js"></script>
   <script src="turn.js"></script>
-<script>
+<!-- <script>
 
 const flipbook = $(".flipbook");
 
@@ -109,6 +118,83 @@ function goToUserPage() {
   }
 }
 
+
+</script> -->
+
+<script>
+
+const flipbook = $(".flipbook");
+
+// Name → Multiple Pages mapping
+let pageMap = {};
+
+$(".flipbook > div").each(function (index) {
+  const namesAttr = $(this).attr("data-names");
+
+  if (namesAttr) {
+    const namesArray = namesAttr.split(",");
+
+    namesArray.forEach(name => {
+      const cleanName = name.trim().toLowerCase();
+
+      // Create array if not exist
+      if (!pageMap[cleanName]) {
+        pageMap[cleanName] = [];
+      }
+
+      // Store page number
+      pageMap[cleanName].push(index + 1);
+    });
+  }
+});
+
+// Initialize turn.js
+flipbook.turn();
+
+flipbook.bind("turning", function (event, page) {
+  const totalPages = flipbook.turn("pages");
+
+  if (page === 1 || page === totalPages) {
+    flipbook.removeClass("shadow-active");
+  } else {
+    flipbook.addClass("shadow-active");
+  }
+});
+
+// Track which result user is currently viewing
+let currentResultIndex = {};
+
+function goToUserPage() {
+  const inputName = document
+    .getElementById("searchID")
+    .value
+    .trim()
+    .toLowerCase();
+
+  if (pageMap[inputName]) {
+
+    // First time searching this user
+    if (currentResultIndex[inputName] === undefined) {
+      currentResultIndex[inputName] = 0;
+    } else {
+      // Next result each search click
+      currentResultIndex[inputName]++;
+
+      // Loop back to first page
+      if (currentResultIndex[inputName] >= pageMap[inputName].length) {
+        currentResultIndex[inputName] = 0;
+      }
+    }
+
+    const pageToOpen =
+      pageMap[inputName][currentResultIndex[inputName]];
+
+    flipbook.turn("page", pageToOpen);
+
+  } else {
+    alert("Name not found!");
+  }
+}
 
 </script>
  
