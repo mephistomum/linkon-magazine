@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <!-- <audio id="bgm" src="audio/bgm.mp3" autoplay loop></audio> -->
+  <audio id="bgm" src="audio/bgm.mp3" autoplay loop></audio>
 
 <div class="headline">
   <img src="images/LINKON.png" alt="Yearbook Headline">
@@ -198,17 +198,17 @@ function goToUserPage() {
 
 </script>
  
-  <!-- <div class="audio-controls">
+  <div class="audio-controls">
   <button id="playPauseBtn">⏸</button>
-  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.6">
-</div> -->
+  <input type="range" id="volumeSlider" min="0" max="0.5" step="0.01" value="0.1">
+</div>
 <script>
   const bgm = document.getElementById("bgm");
   const playPauseBtn = document.getElementById("playPauseBtn");
   const volumeSlider = document.getElementById("volumeSlider");
 
   // Default volume
-  bgm.volume = 0.6;
+  bgm.volume = 0.2;
 
   // Autoplay handling
   bgm.play().catch(() => {
