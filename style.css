@@ -70,16 +70,22 @@ body {
         aspect-ratio: 730 / 530;  /* keep original proportion */
 
         max-width: 730px;
-        max-height: 530px;
+        height: auto;
 
         margin: 0 auto;
     }
 
     .flipbook-page,
     .poem-page {
-        width: 100% !important;
-        height: 100% !important;
+        width: 100% ;
+        height: auto;
     }
+
+    .flipbook img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* prevents cropping */
+}
 
     .headline img {
         width: 150% !important;
